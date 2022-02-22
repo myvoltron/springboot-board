@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈페이지</title>
+</head>
+<body>
+<h1>글 리스트</h1>
+<div>
+    <a th:href="@{/board/insert}" role="button">글 쓰기</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="post : ${postList}">
+            <td th:text="${post.id}">1</td>
+            <td><a th:text="${post.title}" th:href="@{/board/{id}(id=${post.id})}"></a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

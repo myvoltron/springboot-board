@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>홈페이지</title>
+</head>
+<body>
+<h1>상세보기</h1>
+
+<table>
+    <tr>
+        <td>id</td>
+        <td th:text="${post.id}"></td>
+    </tr>
+    <tr>
+        <td>제목</td>
+        <td th:text="${post.title}"></td>
+    </tr>
+    <tr>
+        <td>내용</td>
+        <td th:text="${post.content}"></td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{/board/insert}" role="button">글 쓰기</a>
+    <a th:href="@{/board/update/{id}(id=${post.id})}" role="button">수정하기</a>
+    <form th:action="@{/board/delete}" method="post">
+        <input type="hidden" name="id"  th:value="${post.id}">
+        <button type="submit">삭제하기</button>
+    </form>
+</div>
+</body>
+</html>
