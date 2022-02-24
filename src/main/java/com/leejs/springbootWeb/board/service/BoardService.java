@@ -11,4 +11,6 @@ public interface BoardService {
     public int insertBoard(BoardDTO boardDTO);
     public int updateBoard(BoardDTO boardDTO);
     public int deleteBoard(Long id);
+
+    public int getCount();
 }

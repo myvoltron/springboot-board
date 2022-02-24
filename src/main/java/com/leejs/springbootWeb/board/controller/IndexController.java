@@ -29,8 +29,10 @@ public class IndexController {
     @GetMapping("/list")
     public String indexView(Model model) {
 
+        int listCount = boardServiceImp.getCount();
         List<BoardDTO> postList = boardServiceImp.getList();
 
+        model.addAttribute("count", listCount);
         model.addAttribute("postList", postList);
 
         return "index";

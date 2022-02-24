@@ -1,6 +1,6 @@
 package com.leejs.springbootWeb.board.service;
 
-import com.leejs.springbootWeb.board.dao.BoardMapper;
+import com.leejs.springbootWeb.board.repository.BoardMapper;
 import com.leejs.springbootWeb.board.domain.BoardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +41,12 @@ public class BoardServiceImp implements BoardService{
     public int deleteBoard(Long id) {
 
         return boardMapper.deleteBoard(id);
+    }
+
+    @Override
+    public int getCount() {
+
+        return boardMapper.getCount();
     }
 
 }
