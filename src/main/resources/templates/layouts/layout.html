@@ -11,6 +11,11 @@
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     />
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="/css/main.css"
+    />
     <!-- 컨텐츠페이지의 CSS 영역이 들어감 -->
     <th:block layout:fragment="css"></th:block>
 
@@ -21,9 +26,11 @@
     <th:block layout:fragment="script"></th:block>
 </head>
 
-<header th:replace="/fragments/header.html :: headerFragment"></header>
+<div class="container">
+    <header th:replace="/fragments/header.html :: headerFragment"></header>
 
-<div layout:fragment="content"></div>
+    <div layout:fragment="content"></div>
 
-<footer th:replace="/fragments/footer.html :: footerFragment"></footer>
+    <footer th:replace="/fragments/footer.html :: footerFragment"></footer>
+</div>
 </html>

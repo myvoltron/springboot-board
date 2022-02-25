@@ -11,6 +11,7 @@ import java.util.List;
 public interface BoardMapper {
 
     List<BoardDTO> getList();
+    List<BoardDTO> getLimitedList(int offset, int perPageNum);
     BoardDTO getPost(Long id);
     int insertBoard(BoardDTO boardDTO);
     int updateBoard(BoardDTO boardDTO);

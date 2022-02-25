@@ -1,6 +1,7 @@
 package com.leejs.springbootWeb.board.controller;
 
 import com.leejs.springbootWeb.board.domain.BoardDTO;
+import com.leejs.springbootWeb.board.domain.paging.PageMaker;
 import com.leejs.springbootWeb.board.service.BoardServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,22 +19,23 @@ public class IndexController {
     private BoardServiceImp boardServiceImp;
 
     @GetMapping("/")
-    public String homeView(Model model) {
-        List<BoardDTO> postList = boardServiceImp.getList();
+    public String homeToIndex() {
 
-        model.addAttribute("postList", postList);
-
-        return "index";
+        return "redirect:/board/list";
     }
 
     @GetMapping("/list")
-    public String indexView(Model model) {
+    public String indexView(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
-        int listCount = boardServiceImp.getCount();
-        List<BoardDTO> postList = boardServiceImp.getList();
+        int totalCount = boardServiceImp.getCount();
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setPage(page);
+        pageMaker.setTotalCount(totalCount);
 
-        model.addAttribute("count", listCount);
+        List<BoardDTO> postList = boardServiceImp.getLimitedList(pageMaker);
+
         model.addAttribute("postList", postList);
+        model.addAttribute("pageMaker", pageMaker);
 
         return "index";
     }

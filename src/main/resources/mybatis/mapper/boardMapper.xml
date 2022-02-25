@@ -24,4 +24,10 @@
     <select id="getCount" resultType="int">
         select count(*) from post
     </select>
+
+    <select id="getLimitedList" resultType="BoardDTO">
+        select * from post
+        order by id desc
+        limit #{offset}, #{perPageNum}
+    </select>
 </mapper>

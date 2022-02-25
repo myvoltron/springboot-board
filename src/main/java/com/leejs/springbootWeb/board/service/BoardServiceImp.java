@@ -1,5 +1,6 @@
 package com.leejs.springbootWeb.board.service;
 
+import com.leejs.springbootWeb.board.domain.paging.PageMaker;
 import com.leejs.springbootWeb.board.repository.BoardMapper;
 import com.leejs.springbootWeb.board.domain.BoardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ public class BoardServiceImp implements BoardService{
     public List<BoardDTO> getList() {
 
         return boardMapper.getList();
+    }
+
+    @Override
+    public List<BoardDTO> getLimitedList(PageMaker pageMaker) {
+
+        return boardMapper.getLimitedList(pageMaker.getPageStart(), pageMaker.getPerPageNum());
     }
 
     @Override

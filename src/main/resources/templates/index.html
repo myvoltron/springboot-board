@@ -30,5 +30,24 @@
         </tr>
         </tbody>
     </table>
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" th:with="start=${pageMaker.getStartPage()}, end=${pageMaker.getEndPage()}">
+                <li class="page-item" th:if="${pageMaker.isPrev()}">
+                    <a class="page-link" aria-label="Previous" th:href="@{/board/list(page = ${pageMaker.getPrevNum()})}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:each="page : ${#numbers.sequence(start, end)}" th:class="${page} == ${pageMaker.getPage()} ? 'page-item active' : 'page-item'">
+                    <a class="page-link" th:href="@{/board/list(page = ${page})}" th:text="${page}">#</a>
+                </li>
+                <li class="page-item" th:if="${pageMaker.isNext()}">
+                    <a class="page-link" aria-label="Next" th:href="@{/board/list(page = ${pageMaker.getNextNum()})}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
 </html>

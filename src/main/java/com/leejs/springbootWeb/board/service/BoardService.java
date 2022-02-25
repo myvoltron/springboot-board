@@ -1,12 +1,14 @@
 package com.leejs.springbootWeb.board.service;
 
 import com.leejs.springbootWeb.board.domain.BoardDTO;
+import com.leejs.springbootWeb.board.domain.paging.PageMaker;
 
 import java.util.List;
 
 public interface BoardService {
 
     public List<BoardDTO> getList();
+    public List<BoardDTO> getLimitedList(PageMaker pageMaker);
     public BoardDTO getPost(Long id);
     public int insertBoard(BoardDTO boardDTO);
     public int updateBoard(BoardDTO boardDTO);
