@@ -27,6 +27,12 @@ public class BoardServiceImp implements BoardService{
     }
 
     @Override
+    public List<BoardDTO> getSearchList(PageMaker pageMaker, String searchType, String keyword) {
+
+        return boardMapper.getSearchList(pageMaker.getPageStart(), pageMaker.getPerPageNum(), searchType, keyword);
+    }
+
+    @Override
     public BoardDTO getPost(Long id) {
 
         return boardMapper.getPost(id);

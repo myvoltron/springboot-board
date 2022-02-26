@@ -12,6 +12,7 @@ public interface BoardMapper {
 
     List<BoardDTO> getList();
     List<BoardDTO> getLimitedList(int offset, int perPageNum);
+    List<BoardDTO> getSearchList(int offset, int perPageNum, String searchType, String keyword);
     BoardDTO getPost(Long id);
     int insertBoard(BoardDTO boardDTO);
     int updateBoard(BoardDTO boardDTO);

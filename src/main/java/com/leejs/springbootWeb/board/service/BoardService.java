@@ -9,6 +9,7 @@ public interface BoardService {
 
     public List<BoardDTO> getList();
     public List<BoardDTO> getLimitedList(PageMaker pageMaker);
+    public List<BoardDTO> getSearchList(PageMaker pageMaker, String searchType, String keyword);
     public BoardDTO getPost(Long id);
     public int insertBoard(BoardDTO boardDTO);
     public int updateBoard(BoardDTO boardDTO);

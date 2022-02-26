@@ -25,14 +25,24 @@ public class IndexController {
     }
 
     @GetMapping("/list")
-    public String indexView(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String indexView(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+                            @RequestParam(value = "searchType", defaultValue = "title") String searchType,
+                            @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 
         int totalCount = boardServiceImp.getCount();
         PageMaker pageMaker = new PageMaker();
         pageMaker.setPage(page);
         pageMaker.setTotalCount(totalCount);
 
-        List<BoardDTO> postList = boardServiceImp.getLimitedList(pageMaker);
+        if(searchType.equals("title"))
+            searchType = "T";
+        else if(searchType.equals("content"))
+            searchType = "C";
+        else
+            searchType = "T";
+
+        // List<BoardDTO> postList = boardServiceImp.getLimitedList(pageMaker);
+        List<BoardDTO> postList = boardServiceImp.getSearchList(pageMaker, searchType, keyword);
 
         model.addAttribute("postList", postList);
         model.addAttribute("pageMaker", pageMaker);
