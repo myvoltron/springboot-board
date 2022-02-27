@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout}"
+>
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css"></th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script"></th:block>
+
+<div layout:fragment="content" class="container">
+    <h1>회원정보 수정</h1>
+    <form th:action="@{/member/update}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">이름</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${member.name}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" th:value="${member.email}">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="password" name="password" th:value="${member.password}">
+        </div>
+        <a th:href="@{/member/list}" role="button" class="btn btn-primary">뒤로가기</a>
+        <button type="submit" class="btn btn-secondary">등록</button>
+    </form>
+</div>
+
+</html>
