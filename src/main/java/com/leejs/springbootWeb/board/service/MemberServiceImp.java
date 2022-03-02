@@ -24,6 +24,11 @@ public class MemberServiceImp implements MemberService{
     }
 
     @Override
+    public MemberDTO findByEmail(String email) {
+        return memberMapper.getMemberByEmail(email);
+    }
+
+    @Override
     public int insertMember(MemberDTO memberDTO) {
         return memberMapper.insertMember(memberDTO);
     }

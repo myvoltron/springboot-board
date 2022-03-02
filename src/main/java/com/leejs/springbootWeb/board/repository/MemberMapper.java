@@ -12,6 +12,7 @@ public interface MemberMapper {
 
     List<MemberDTO> getMemberList();
     MemberDTO getMember(Long id);
+    MemberDTO getMemberByEmail(String email);
     int insertMember(MemberDTO memberDTO);
     int updateMember(Long id, MemberDTO memberDTO);
     int deleteMember(Long id);

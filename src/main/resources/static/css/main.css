@@ -1,13 +1,8 @@
-#menu {
-    display: flex;
-    justify-content: space-between;
-}
-
-#menu > form {
-    display: flex;
-    margin-top: 1em;
-}
-
 #search {
     margin-right: 2em;
+}
+
+.buttonAndSearch {
+    display: flex;
+    justify-content: space-between;
 }

@@ -10,4 +10,6 @@ public class BoardDTO {
     private Long id;
     private String title;
     private String content;
+    private Long writer_id;
+    private Long views;
 }

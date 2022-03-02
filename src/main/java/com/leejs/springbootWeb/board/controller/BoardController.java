@@ -1,6 +1,7 @@
 package com.leejs.springbootWeb.board.controller;
 
 import com.leejs.springbootWeb.board.domain.BoardDTO;
+import com.leejs.springbootWeb.board.domain.MemberDTO;
 import com.leejs.springbootWeb.board.domain.paging.PageMaker;
 import com.leejs.springbootWeb.board.service.BoardServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,9 +28,19 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public String indexView(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+    public String indexView(HttpServletRequest request, Model model, @RequestParam(value = "page", defaultValue = "1") int page,
                             @RequestParam(value = "searchType", defaultValue = "title") String searchType,
                             @RequestParam(value = "keyword", defaultValue = "") String keyword) {
+
+        // getSession(true) 를 사용하면 처음 들어온 사용자도 세션이 만들어지기 때문에 false로 받음
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+
+            if(memberDTO != null) {
+                model.addAttribute("member", memberDTO);
+            }
+        }
 
         int totalCount = boardServiceImp.getCount();
         PageMaker pageMaker = new PageMaker();

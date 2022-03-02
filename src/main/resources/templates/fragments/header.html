@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:fragment="headerFragment">
     <!-- As a heading -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-md" id="menu">
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-md">
             <a class="navbar-brand" href="/board/list">Home</a>
-            <a class="nav-link active" href="/member/list">member</a>
-            <form class="d-flex" th:action="@{/board/list}" method="get">
-                <select class="form-control" name="searchType">
-                    <option value="title">title</option>
-                    <option value="content">content</option>
-                </select>
-                <input class="form-control me-2" name="keyword" type="search" placeholder="Search" aria-label="Search" id="search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" href="/member/list">member</a>
+                </div>
+            </div>
+            <div class="col-md-3 text-end">
+                <a class="btn btn-outline-primary me-2" href="/auth/login" role="button">Login</a>
+                <a class="btn btn-primary" href="/member/insert" role="button">Sign-up</a>
+            </div>
         </div>
     </nav>
 </header>
