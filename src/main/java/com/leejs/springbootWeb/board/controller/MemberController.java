@@ -36,12 +36,7 @@ public class MemberController {
     }
 
     @PostMapping("/insert")
-    public String memberInsert(HttpServletRequest request) {
-
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setEmail(request.getParameter("email"));
-        memberDTO.setPassword(request.getParameter("password"));
-        memberDTO.setName(request.getParameter("name"));
+    public String memberInsert(MemberDTO memberDTO) {
 
         memberServiceImp.insertMember(memberDTO);
         return "redirect:/member/list";
@@ -62,22 +57,14 @@ public class MemberController {
     }
 
     @PostMapping("/update")
-    public String memberUpdate(HttpServletRequest request) {
-
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setId(Long.valueOf(request.getParameter("id")));
-        memberDTO.setEmail(request.getParameter("email"));
-        memberDTO.setPassword(request.getParameter("password"));
-        memberDTO.setName(request.getParameter("name"));
+    public String memberUpdate(MemberDTO memberDTO) {
 
         memberServiceImp.insertMember(memberDTO);
         return "redirect:/member/list";
     }
 
     @PostMapping("delete")
-    public String memberDelete(HttpServletRequest request) {
-
-        Long id = Long.parseLong(request.getParameter("id"));
+    public String memberDelete(Long id) {
 
         memberServiceImp.deleteMember(id);
         return "redirect:/member/list";

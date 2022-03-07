@@ -1,6 +1,8 @@
 package com.leejs.springbootWeb.board.controller;
 
+import com.leejs.springbootWeb.board.domain.LoginInfo;
 import com.leejs.springbootWeb.board.domain.MemberDTO;
+import com.leejs.springbootWeb.board.service.LoginService;
 import com.leejs.springbootWeb.board.service.MemberServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpSession;
 public class AuthController {
 
     @Autowired
-    private MemberServiceImp memberServiceImp;
+    private LoginService loginService;
 
     @GetMapping("/login")
     public String loginFormView() {
@@ -25,32 +27,24 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(HttpServletRequest request) {
+    public String login(LoginInfo loginInfo, HttpServletRequest request) {
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        System.out.println(email);
-        System.out.println(password);
+        MemberDTO memberDTO = loginService.login(loginInfo.getEmail(), loginInfo.getPassword());
+        if(memberDTO == null) {
+            return "redirect:/auth/login";
+        }
 
         HttpSession session = request.getSession();
+        session.setAttribute("member", memberDTO);
 
-        MemberDTO memberDTO = memberServiceImp.findByEmail(email);
-        if(memberDTO != null) { // member가 존재한다면
-            if(memberDTO.getPassword().equals(password)) { // 비밀번호 비교
+        return "redirect:/board/list";
+    }
 
-                System.out.println("로그인 성공");
-                session.setAttribute("member", memberDTO); // 비밀번호도 맞다면 session에 member 추가
-            } else {
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
 
-                System.out.println("비밀번호 틀림");
-                System.out.println("이메일 혹은 비밀번호 확인해주세요"); // 비밀번호 틀림
-            }
-        } else {
-
-            System.out.println("member 존재 X");
-            System.out.println("이메일 혹은 비밀번호 확인해주세요"); // member가 존재하지 않음
-        }
+        HttpSession session = request.getSession();
+        session.invalidate();
 
         return "redirect:/board/list";
     }

@@ -33,14 +33,14 @@ public class BoardController {
                             @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 
         // getSession(true) 를 사용하면 처음 들어온 사용자도 세션이 만들어지기 때문에 false로 받음
-        HttpSession session = request.getSession(false);
-        if(session != null) {
-            MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-
-            if(memberDTO != null) {
-                model.addAttribute("member", memberDTO);
-            }
-        }
+//        HttpSession session = request.getSession(false);
+//        if(session != null) {
+//            MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+//
+//            if(memberDTO != null) {
+//                model.addAttribute("member", memberDTO);
+//            }
+//        }
 
         int totalCount = boardServiceImp.getCount();
         PageMaker pageMaker = new PageMaker();
@@ -69,12 +69,23 @@ public class BoardController {
         return "insert";
     }
 
-    @PostMapping("/insert")
-    public String insertBoard(HttpServletRequest request) {
+//    @PostMapping("/insert")
+//    public String insertBoard(HttpServletRequest request) {
+//
+//        BoardDTO boardDTO = new BoardDTO();
+//        boardDTO.setTitle(request.getParameter("title"));
+//        boardDTO.setContent(request.getParameter("content"));
+//
+//        boardServiceImp.insertBoard(boardDTO);
+//        return "redirect:/board/list";
+//    }
 
-        BoardDTO boardDTO = new BoardDTO();
-        boardDTO.setTitle(request.getParameter("title"));
-        boardDTO.setContent(request.getParameter("content"));
+    /*
+    HttpServletRequest로 매개변수를 받아서 request의 getParameter() 메서드로 post값들을 받는 방법도 있지만
+    그냥 POST의 key(name)으로 객체를 만들어서 받을 수도 있다.
+     */
+    @PostMapping("/insert")
+    public String insertBoard(BoardDTO boardDTO) {
 
         boardServiceImp.insertBoard(boardDTO);
         return "redirect:/board/list";
@@ -97,21 +108,14 @@ public class BoardController {
     }
 
     @PostMapping("/update")
-    public String updateBoard(HttpServletRequest request) {
-
-        BoardDTO boardDTO = new BoardDTO();
-        boardDTO.setId(Long.parseLong(request.getParameter("id")));
-        boardDTO.setTitle(request.getParameter("title"));
-        boardDTO.setContent(request.getParameter("content"));
+    public String updateBoard(BoardDTO boardDTO) {
 
         boardServiceImp.updateBoard(boardDTO);
         return "redirect:/board/list";
     }
 
     @PostMapping("/delete")
-    public String deleteBoard(HttpServletRequest request) {
-
-        Long id = Long.parseLong(request.getParameter("id"));
+    public String deleteBoard(Long id) {
 
         boardServiceImp.deleteBoard(id);
         return "redirect:/board/list";

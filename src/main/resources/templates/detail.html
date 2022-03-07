@@ -14,17 +14,28 @@
 <div layout:fragment="content" class="container">
     <h1>상세보기</h1>
 
-    <div class="card" style="width: 25rem;">
+    <div class="card">
         <div class="card-body">
-            <h5 class="card-title" th:text="${post.title}">Card title</h5>
-            <p class="card-text" th:text="${post.content}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a th:href="@{/board/insert}" role="button" class="btn btn-primary">글 쓰기</a>
-            <a th:href="@{/board/update/{id}(id=${post.id})}" role="button" class="btn btn-secondary">수정하기</a>
-            <form th:action="@{/board/delete}" method="post">
-                <input type="hidden" name="id" th:value="${post.id}">
-                <button type="submit" class="btn btn-danger">삭제하기</button>
-            </form>
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <p class="card-text" th:text="${post.content}"></p>
+            <br>
+            <div style="display:flex;">
+                <a th:href="@{/board/insert}" role="button" class="btn btn-primary">글 쓰기</a>
+                <a th:href="@{/board/update/{id}(id=${post.id})}" role="button" class="btn btn-secondary">수정하기</a>
+                <form th:action="@{/board/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${post.id}">
+                    <button type="submit" class="btn btn-danger">삭제하기</button>
+                </form>
+            </div>
         </div>
+    </div>
+    <hr>
+    <form>
+        <label></label>
+
+    </form>
+    <div>
+
     </div>
 </div>
 

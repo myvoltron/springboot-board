@@ -11,8 +11,9 @@
                 </div>
             </div>
             <div class="col-md-3 text-end">
-                <a class="btn btn-outline-primary me-2" href="/auth/login" role="button">Login</a>
-                <a class="btn btn-primary" href="/member/insert" role="button">Sign-up</a>
+                <a class="btn btn-outline-primary me-2" href="/auth/login" role="button" th:if="${session.member == null}">Login</a>
+                <a class="btn btn-primary" href="/member/insert" role="button" th:if="${session.member == null}">Sign-up</a>
+                <a class="btn btn-outline-primary me-2" href="/auth/logout" role="button" th:unless="${session.member == null}">Logout</a>
             </div>
         </div>
     </nav>
