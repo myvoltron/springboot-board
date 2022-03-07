@@ -30,12 +30,32 @@
         </div>
     </div>
     <hr>
-    <form>
-        <label></label>
+    <br>
 
-    </form>
-    <div>
+    <!-- 댓글 쓰기 -->
+    <div class="container">
+        <form th:action="@{/board/comment/{id}(id=${post.id})}" method="post" class="row g-3">
+            <input type="hidden" name="post_id" th:value="${post.id}"/>
+            <div class="col-auto">
+                <label for="content" class="form-label">댓글 작성하기</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit">등록</button>
+            </div>
+        </form>
+    </div>
 
+    <!-- 댓글 리스트 -->
+    <div class="container">
+        <div class="comments" th:each="comment : ${comments}">
+            <span th:text="${comment.id}"></span>
+            <p th:text="${comment.content}"></p>
+            <p th:if="${writer_id == null}">익명</p>
+            <hr>
+        </div>
     </div>
 </div>
 

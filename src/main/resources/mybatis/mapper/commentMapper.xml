@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leejs.springbootWeb.board.repository.CommentMapper">
+    <select id="getCommentList" resultType="CommentDTO">
+        select * from comment;
+    </select>
+    <select id="getCommentListByPostId" resultType="CommentDTO">
+        select * from comment where post_id = ${post_id}
+    </select>
+    <select id="getCommentListByWriterId" resultType="CommentDTO">
+        select * from comment where writer_id = ${writer_id}
+    </select>
+    <insert id="insertComment">
+        <if test="writer_id == null">
+            insert into comment(content, post_id) values(#{content}, ${post_id})
+        </if>
+        <if test="writer_id != null">
+            insert into comment(content, writer_id, post_id) values(#{content}, ${writer_id}, ${post_id})
+        </if>
+    </insert>
+</mapper>

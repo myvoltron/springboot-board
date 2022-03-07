@@ -1,9 +1,11 @@
 package com.leejs.springbootWeb.board.controller;
 
 import com.leejs.springbootWeb.board.domain.BoardDTO;
+import com.leejs.springbootWeb.board.domain.CommentDTO;
 import com.leejs.springbootWeb.board.domain.MemberDTO;
 import com.leejs.springbootWeb.board.domain.paging.PageMaker;
 import com.leejs.springbootWeb.board.service.BoardServiceImp;
+import com.leejs.springbootWeb.board.service.CommentServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class BoardController {
 
     @Autowired
     private BoardServiceImp boardServiceImp;
+
+    @Autowired
+    private CommentServiceImp commentServiceImp;
 
     @GetMapping("/")
     public String homeToIndex() {
@@ -91,12 +96,21 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    // 상세보기 : 글과 댓글목록을 가져와야 함
     @GetMapping("/{id}")
     public String detailView(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("post", boardServiceImp.getPost(id));
+        model.addAttribute("comments", commentServiceImp.getCommentListByPostId(id));
 
         return "detail";
+    }
+
+    @PostMapping("/comment/{post_id}")
+    public String insertComment(@PathVariable("post_id") Long post_id, CommentDTO commentDTO) {
+
+        commentServiceImp.insertComment(commentDTO.getContent(), post_id, null);
+        return "redirect:/board/" + post_id;
     }
 
     @GetMapping("/update/{id}")
