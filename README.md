@@ -18,5 +18,7 @@
 - 댓글 기능
 
 ## URL 설계 
+![게시판_URL설계](https://user-images.githubusercontent.com/72268581/157219817-c70dfc6d-81f4-4d37-8815-d5ab15d9097b.PNG)
 
 ## DB 스키마 구조 
+![게시판_DB테이블2](https://user-images.githubusercontent.com/72268581/157216876-9454b044-41b6-4767-bc24-80298872a552.PNG)
