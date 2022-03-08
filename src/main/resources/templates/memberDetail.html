@@ -18,12 +18,13 @@
         <div class="card-body">
             <h5 class="card-title" th:text="${member.name}">Card title</h5>
             <p class="card-text" th:text="${member.email}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a th:href="@{/member/insert}" role="button" class="btn btn-primary">글 쓰기</a>
-            <a th:href="@{/member/update/{id}(id=${member.id})}" role="button" class="btn btn-secondary">수정하기</a>
-            <form th:action="@{/member/delete}" method="post">
-                <input type="hidden" name="id" th:value="${member.id}">
-                <button type="submit" class="btn btn-danger">삭제하기</button>
-            </form>
+            <div style="display: flex">
+                <a th:href="@{/member/update/{id}(id=${member.id})}" role="button" class="btn btn-secondary">수정하기</a>
+                <form th:action="@{/member/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${member.id}">
+                    <button type="submit" class="btn btn-danger">삭제하기</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
