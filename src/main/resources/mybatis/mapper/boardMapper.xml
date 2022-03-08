@@ -25,6 +25,10 @@
         select count(*) from post
     </select>
 
+    <select id="getCountByKeyword" resultType="int">
+        select count(*) from post where ${searchType} like CONCAT('%', #{keyword}, '%')
+    </select>
+
     <select id="getLimitedList" resultType="BoardDTO">
         select * from post
         order by id desc
@@ -33,12 +37,7 @@
 
     <select id="getSearchList" resultType="BoardDTO">
         select * from post
-        <if test='searchType == "T"'>
-            where title like CONCAT('%', #{keyword}, '%')
-        </if>
-        <if test='searchType == "C"'>
-            where content like CONCAT('%', #{keyword}, '%')
-        </if>
+        where ${searchType} like CONCAT('%', #{keyword}, '%')
         order by id desc
         limit #{offset}, #{perPageNum}
     </select>

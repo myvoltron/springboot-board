@@ -19,4 +19,5 @@ public interface BoardMapper {
     int deleteBoard(Long id);
 
     int getCount();
+    int getCountByKeyword(String searchType, String keyword);
 }

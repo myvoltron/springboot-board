@@ -12,10 +12,10 @@
 <th:block layout:fragment="script"></th:block>
 
 <div layout:fragment="content" class="container">
-    <th:block th:if="${member}">
-        <h1 th:text="${member.getName()} + '님 안녕하세요'"></h1>
+    <th:block th:if="${session.member}">
+        <h1 th:text="${session.member.getName()} + '님 안녕하세요'"></h1>
     </th:block>
-    <th:block th:unless="${member}">
+    <th:block th:unless="${session.member}">
         <h1>리스트 페이지</h1>
     </th:block>
     <div class="buttonAndSearch">

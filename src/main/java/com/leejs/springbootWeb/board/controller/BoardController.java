@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -47,17 +45,10 @@ public class BoardController {
 //            }
 //        }
 
-        int totalCount = boardServiceImp.getCount();
+        int totalCount = boardServiceImp.getCountByKeyword(searchType, keyword);
         PageMaker pageMaker = new PageMaker();
         pageMaker.setPage(page);
         pageMaker.setTotalCount(totalCount);
-
-        if(searchType.equals("title"))
-            searchType = "T";
-        else if(searchType.equals("content"))
-            searchType = "C";
-        else
-            searchType = "T";
 
         // List<BoardDTO> postList = boardServiceImp.getLimitedList(pageMaker);
         List<BoardDTO> postList = boardServiceImp.getSearchList(pageMaker, searchType, keyword);

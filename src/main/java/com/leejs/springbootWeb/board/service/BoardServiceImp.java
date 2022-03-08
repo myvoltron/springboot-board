@@ -62,4 +62,9 @@ public class BoardServiceImp implements BoardService{
         return boardMapper.getCount();
     }
 
+    @Override
+    public int getCountByKeyword(String searchType, String keyword) {
+        return boardMapper.getCountByKeyword(searchType, keyword);
+    }
+
 }

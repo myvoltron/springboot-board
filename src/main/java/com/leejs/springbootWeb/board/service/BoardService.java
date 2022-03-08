@@ -16,4 +16,5 @@ public interface BoardService {
     public int deleteBoard(Long id);
 
     public int getCount();
+    public int getCountByKeyword(String searchType, String keyword);
 }
